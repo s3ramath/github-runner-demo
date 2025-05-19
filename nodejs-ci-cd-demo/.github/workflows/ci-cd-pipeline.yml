@@ -1,0 +1,38 @@
+name: Carles-Node.js CI/CD Pipeline
+
+on: [push]
+
+jobs:
+  build-and-deploy:
+    runs-on: [self-hosted, DEV-TEAM]  # Target your self-hosted runner
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build Docker Image
+        run: |
+          docker build -t s5carles/nodejs-demo:latest .
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Push Docker Image
+        run: docker push s5carles/nodejs-demo:latest
+
+      - name: Deploy to Docker Container
+        run: |
+          docker stop nodejs-demo || true
+          docker rm nodejs-demo || true
+          docker run -d --name nodejs-demo -p 80:3000 s5carles/nodejs-demo:runner

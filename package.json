@@ -1,0 +1,16 @@
+{
+    "name": "nodejs-ci-cd-demo",
+    "version": "1.0.0",
+    "description": "A sample Node.js app for GitHub Actions self-hosted runner demo",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js",
+      "test": "echo \"No tests defined\" && exit 0"
+    },
+    "author": "Your Name",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.18.2"
+    }
+  }
+  
