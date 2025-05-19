@@ -1,4 +1,4 @@
-name: Carles-Node.js CI/CD Pipeline project
+name: Carles-Node.js CI/CD Pipeline pro
 
 on:
   workflow_dispatch:
