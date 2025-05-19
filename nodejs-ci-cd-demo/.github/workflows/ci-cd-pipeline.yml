@@ -1,4 +1,4 @@
-name: Carles-Node.js CI/CD Pipeline
+name: Carles-Node.js CI/CD Pipeline project
 
 on: [push]
 
