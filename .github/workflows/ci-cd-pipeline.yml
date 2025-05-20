@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-my-first-cicd:
     runs-on: [self-hosted, DEV-TEAM]  # Target your self-hosted runner
 
     steps:
