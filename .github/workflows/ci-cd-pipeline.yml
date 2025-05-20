@@ -1,14 +1,14 @@
 name: Carles-Node.js CI/CD Pipeline 
 
 on:
-  #workflow_dispatch:
+  workflow_dispatch:
   push:
     branches:
       - main
 
 jobs:
   build-and-deploy-my-first-cicd:
-    runs-on: [self-hosted, DEV-TEAM]  # Target your self-hosted runner
+    runs-on: [self-hosted, DEV-TEAM]  # Make sure your runner has both these labels
 
     steps:
       - name: Checkout Code
@@ -30,10 +30,7 @@ jobs:
           docker build -t s5carles/nodejs-demo:latest .
 
       - name: Log in to Docker Hub
-
-        if: ${{ secrets.DOCKERHUB_USERNAME && secrets.DOCKERHUB_PASSWORD }}
         run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin --quiet
-
 
       - name: Push Docker Image
         run: docker push s5carles/nodejs-demo:latest
@@ -42,4 +39,4 @@ jobs:
         run: |
           docker stop nodejs-demo || true
           docker rm nodejs-demo || true
-          docker run -d --name nodejs-demo -p 80:3000 s5carles/nodejs-demo:runner
+          docker run -d --name nodejs-demo -p 80:3000 s5carles/nodejs-demo:latest
