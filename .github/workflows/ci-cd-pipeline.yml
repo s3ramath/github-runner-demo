@@ -38,4 +38,4 @@ jobs:
       run: |
         docker stop nodejs-demo || true
         docker rm nodejs-demo || true
-        docker run -d --name nodejs-demo -p 80:3000 s5carles/nodejs-demo:runner
+        docker run -d --name nodejs-demo -p 8000:3000 s5carles/nodejs-demo:runner
